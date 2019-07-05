@@ -16,4 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/test', function (Request $request) {
     dd($request->user());
 });
-Route::apiResource('user', 'API\UserController');
+Route::apiResource('user', 'API\UserController')->middleware('auth:api');
+Route::apiResource('movie', 'API\MovieController')->middleware('auth:api');

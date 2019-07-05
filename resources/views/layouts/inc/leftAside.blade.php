@@ -75,7 +75,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="/movies" class="nav-link active">
                                 <i class="fas fa-video nav-icon"></i>
                                 <p>See All Movies</p>
                             </a>
