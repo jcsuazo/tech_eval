@@ -7,6 +7,15 @@
 require('./bootstrap')
 require('admin-lte')
 window.Vue = require('vue')
+import swal from 'sweetalert2'
+window.swal = swal
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+})
+window.toast = toast
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -17,7 +26,10 @@ window.Vue = require('vue')
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 Vue.component(
     'users-component',
     require('./components/UsersComponent.vue').default

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/test', function (Request $request) {
     dd($request->user());
 });
+Route::apiResource('user', 'API\UserController');
