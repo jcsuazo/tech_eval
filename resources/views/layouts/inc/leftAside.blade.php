@@ -46,7 +46,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/api/users" class="nav-link active">
+                            <a href="/users" class="nav-link active">
                                 <i class="fas fa-users nav-icon"></i>
                                 <p>See All Users</p>
                             </a>
