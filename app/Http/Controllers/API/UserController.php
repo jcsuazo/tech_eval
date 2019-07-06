@@ -38,7 +38,7 @@ class UserController extends Controller
                 'last_name' => ['required', 'string', 'max:191'],
                 'role' => ['required'],
                 'age' => ['required'],
-                'password' => ['required', 'string', 'min:8'],
+                'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
 
             ]
         );
