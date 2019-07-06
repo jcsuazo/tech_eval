@@ -6,13 +6,12 @@ Clone or Download repo
 Install composer files
 ```bash
 composer install
-
+```
 Intall Dependencies
 ```bash
 npm install
 ```
 
-```
 Create a new .env file and Copy .env.example to .env and set the good values inside .env
 
 Create a new Application key
