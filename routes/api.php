@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/test', function (Request $request) {
-    return $request->user()->id;
+Route::middleware('auth:api')->get('/getUser', function (Request $request) {
+    return $request->user();
 });
 Route::apiResource('user', 'API\UserController')->middleware('auth:api');
 Route::get('findUser', 'API\UserController@findUser')->middleware('auth:api');
