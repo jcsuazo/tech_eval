@@ -38,13 +38,7 @@ class MovieController extends Controller
                 'poster' => ['required'],
             ]
         );
-        // return Movie::create($validation);
-        return Movie::create([
-            'title' => $request['title'],
-            'imdb_number' => $request['imdb_number'],
-            'year' => $request['year'],
-            'poster' => $request['poster'],
-        ]);
+        return Movie::create($validation);
     }
 
     /**
@@ -67,13 +61,18 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        $validation = $request->validate(
+
+        if ($request->poster !== $movie->poster) {
+            $name = str_replace(' ', '_', $request->title) . '_' . time() . "." . explode(';', explode('/', $request->poster)[1])[0];
+            \Image::make($request->poster)->save(public_path('img/profile/') . $name);
+            $request->merge(['poster' => $name]);
+        }
+        $request->validate(
             [
                 'title' => ['required', 'string', 'max:191'],
                 'imdb_number' => ['required', 'string', 'max:191'],
                 'year' => ['required', 'string', 'max:191'],
-                'poster' => ['required'],
-
+                'poster' => ['sometimes']
             ]
         );
         $movie->update($request->all());

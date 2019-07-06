@@ -2019,11 +2019,22 @@ __webpack_require__.r(__webpack_exports__);
       var file = e.target.files[0];
       var reader = new FileReader();
 
-      reader.onload = function (file) {
-        _this.form.poster = reader.result;
-      };
+      if (file["size"] < 2111775) {
+        reader.onload = function (file) {
+          _this.form.poster = reader.result;
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        swal.fire({
+          type: "error",
+          title: "Oops...",
+          text: "The image need to be 2mb or less"
+        });
+        var input = this.$refs.fileInput;
+        input.type = "text";
+        input.type = "file";
+      }
     },
     updateMovie: function updateMovie() {
       var _this2 = this;
@@ -2074,6 +2085,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editModal: function editModal(movie) {
+      var input = this.$refs.fileInput;
+      input.type = "text";
+      input.type = "file";
       this.editMode = true;
       this.form.reset();
       $("#addNew").modal("show");

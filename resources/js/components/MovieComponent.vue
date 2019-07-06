@@ -160,10 +160,21 @@ export default {
     addPoster(e) {
       let file = e.target.files[0];
       let reader = new FileReader();
-      reader.onload = file => {
-        this.form.poster = reader.result;
-      };
-      reader.readAsDataURL(file);
+      if (file["size"] < 2111775) {
+        reader.onload = file => {
+          this.form.poster = reader.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        swal.fire({
+          type: "error",
+          title: "Oops...",
+          text: "The image need to be 2mb or less"
+        });
+        const input = this.$refs.fileInput;
+        input.type = "text";
+        input.type = "file";
+      }
     },
     updateMovie() {
       this.form.put("api/movie/" + this.form.id).then(data => {
@@ -206,6 +217,9 @@ export default {
       });
     },
     editModal(movie) {
+      const input = this.$refs.fileInput;
+      input.type = "text";
+      input.type = "file";
       this.editMode = true;
       this.form.reset();
       $("#addNew").modal("show");
