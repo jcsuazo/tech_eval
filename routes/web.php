@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/users', 'UsersController');
 Route::resource('/movies', 'MovieController');
 Route::get('/browse', 'MovieController@browse');
+Route::view('/dev', 'pages.developer');

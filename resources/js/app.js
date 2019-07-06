@@ -34,6 +34,7 @@ Vue.component(
     'dashboard-component',
     require('./components/DashboardComponent.vue').default
 )
+Vue.component('dev-component', require('./components/DevComponent.vue').default)
 Vue.component(
     'user-component',
     require('./components/UserComponent.vue').default
@@ -52,6 +53,20 @@ Vue.component(
     require('./components/BrowseComponent.vue').default
 )
 Vue.component('pagination', require('laravel-vue-pagination'))
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+)
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+)
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -64,6 +64,23 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-sliders-h nav-icon"></i>
+                        <p>
+                            Developer Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/dev" class="nav-link active">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>Developer Panel</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
 
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
