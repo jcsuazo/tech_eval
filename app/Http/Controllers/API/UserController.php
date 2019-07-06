@@ -28,7 +28,10 @@ class UserController extends Controller
      */
     public function store(User $user,  Request $request)
     {
-        $validation = $request->validate(
+        if (auth('api')->user()->role !== 'admin') {
+            abort(403);
+        }
+        $request->validate(
             [
                 'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
                 'name' => ['required', 'string', 'max:191'],
