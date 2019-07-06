@@ -15,7 +15,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::latest()->paginate(10);
+        return Movie::latest()->paginate(9);
     }
 
     /**

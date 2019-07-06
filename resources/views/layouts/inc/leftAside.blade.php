@@ -81,9 +81,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/browse" class="nav-link">
                                 <i class="far fa-plus-square nav-icon"></i>
-                                <p>Add Movies</p>
+                                <p>Browse Movies</p>
                             </a>
                         </li>
                         <li class="nav-item">

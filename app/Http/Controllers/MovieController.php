@@ -16,6 +16,10 @@ class MovieController extends Controller
     {
         return view('pages.movies');
     }
+    public function browse()
+    {
+        return view('pages.browse');
+    }
 
     /**
      * Show the form for creating a new resource.
