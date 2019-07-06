@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Movie;
 
 class UserController extends Controller
 {
@@ -55,7 +56,20 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
-    { }
+    {
+        // return $favorites = $user->favorites()->all();
+        $favorites =  $user->favorites;
+        $arr = [];
+        foreach ($favorites as $key) {
+            $arr[] = Movie::find($key->movie_id);
+        }
+        return [
+            'user' => $user,
+            'favorite_movies' => $arr
+        ];
+        // dd($favorites);
+        // return $user;
+    }
 
     /**
      * Update the specified resource in storage.
@@ -91,5 +105,16 @@ class UserController extends Controller
     {
         $user->delete();
         return ['message' => 'user deleted'];
+    }
+    public function findUser()
+    {
+        if ($search = \Request::get('q')) {
+            $user = User::where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })->paginate(20);
+        } else {
+            $user = User::latest()->paginate(10);
+        }
+        return $user;
     }
 }

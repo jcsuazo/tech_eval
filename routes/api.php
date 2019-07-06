@@ -14,9 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/test', function (Request $request) {
-    dd($request->user());
+    return $request->user()->id;
 });
 Route::apiResource('user', 'API\UserController')->middleware('auth:api');
+Route::get('findUser', 'API\UserController@findUser')->middleware('auth:api');
 Route::apiResource('movie', 'API\MovieController')->middleware('auth:api');
-// Route::post('favorites/{user}/{movie}', 'API\FavoritesController@store')->middleware('auth:api');
+Route::get('findMovie', 'API\MovieController@findMovie')->middleware('auth:api');
 Route::apiResource('favorites', 'API\FavoritesController')->middleware('auth:api');

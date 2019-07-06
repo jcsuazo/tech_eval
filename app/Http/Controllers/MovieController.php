@@ -49,9 +49,7 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
-    {
-        //
-    }
+    { }
 
     /**
      * Show the form for editing the specified resource.

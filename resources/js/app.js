@@ -31,17 +31,23 @@ window.Form = Form
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component(
+    'user-component',
+    require('./components/UserComponent.vue').default
+)
+Vue.component(
     'users-component',
     require('./components/UsersComponent.vue').default
 )
+
 Vue.component(
-    'movie-component',
-    require('./components/MovieComponent.vue').default
+    'movies-component',
+    require('./components/MoviesComponent.vue').default
 )
 Vue.component(
     'browse-component',
     require('./components/BrowseComponent.vue').default
 )
+Vue.component('pagination', require('laravel-vue-pagination'))
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

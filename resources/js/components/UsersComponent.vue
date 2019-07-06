@@ -5,6 +5,24 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Users Table</h3>
+            <!-- SEARCH FORM -->
+            <form class="form-inline justify-content-center form_order" @submit.prevent="searchit">
+              <div class="input-group input-group-sm">
+                <input
+                  class="form-control form-control-navbar"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  v-model="search"
+                  @keyup.enter="searchit"
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-navbar">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
             <div class="card-tools">
               <button
                 class="btn btn-success"
@@ -34,7 +52,9 @@
               <tbody>
                 <tr v-for="user in users.data" :key="user.id">
                   <td>{{user.id}}</td>
-                  <td>{{user.name}}</td>
+                  <td>
+                    <a :href="'/users/'+user.id">{{user.name}}</a>
+                  </td>
                   <td>{{user.last_name}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.role}}</td>
@@ -53,6 +73,14 @@
             </table>
           </div>
           <!-- /.card-body -->
+          <div class="card-footer">
+            <nav aria-label="Contacts Page Navigation">
+              <ul class="pagination justify-content-end m-0">
+                <pagination :data="users" @pagination-change-page="getResults"></pagination>
+              </ul>
+            </nav>
+          </div>
+          <!-- /.card-footer -->
         </div>
         <!-- /.card -->
       </div>
@@ -170,6 +198,7 @@
 export default {
   data() {
     return {
+      search: "",
       editMode: false,
       users: {},
       form: new Form({
@@ -184,6 +213,16 @@ export default {
     };
   },
   methods: {
+    searchit() {
+      axios.get("api/findUser?q=" + this.search).then(data => {
+        this.users = data.data;
+      });
+    },
+    getResults(page = 1) {
+      axios.get("api/user?page=" + page).then(response => {
+        this.users = response.data;
+      });
+    },
     updateUser() {
       this.form.put("api/user/" + this.form.id).then(data => {
         this.loadUsers();

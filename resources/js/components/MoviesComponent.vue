@@ -5,6 +5,24 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Movies Table</h3>
+            <!-- SEARCH FORM -->
+            <form class="form-inline justify-content-center form_order" @submit.prevent="searchit">
+              <div class="input-group input-group-sm">
+                <input
+                  class="form-control form-control-navbar"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  v-model="search"
+                  @keyup.enter="searchit"
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-navbar">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
             <div class="card-tools">
               <button
                 class="btn btn-success"
@@ -51,14 +69,20 @@
             </table>
           </div>
           <!-- /.card-body -->
+          <div class="card-footer">
+            <nav aria-label="Contacts Page Navigation">
+              <ul class="pagination justify-content-end m-0">
+                <pagination :data="movies" @pagination-change-page="getResults"></pagination>
+              </ul>
+            </nav>
+          </div>
+          <!-- /.card-footer -->
         </div>
         <!-- /.card -->
       </div>
     </div>
     <!-- Modal -->
-    <!-- title
-    imdb_number
-    poster-->
+
     <div
       class="modal fade"
       id="addNew"
@@ -146,6 +170,7 @@ export default {
   data() {
     return {
       editMode: false,
+      search: "",
       movies: {},
       form: new Form({
         id: "",
@@ -157,6 +182,16 @@ export default {
     };
   },
   methods: {
+    searchit() {
+      axios.get("api/findMovie?q=" + this.search).then(data => {
+        this.movies = data.data;
+      });
+    },
+    getResults(page = 1) {
+      axios.get("api/movie?page=" + page).then(response => {
+        this.movies = response.data;
+      });
+    },
     addPoster(e) {
       let file = e.target.files[0];
       let reader = new FileReader();

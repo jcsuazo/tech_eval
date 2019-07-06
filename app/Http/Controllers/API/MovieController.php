@@ -85,8 +85,20 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return ['message' => 'movie deleted'];
+    }
+    public function findMovie()
+    {
+        if ($search = \Request::get('q')) {
+            $movies = Movie::where(function ($query) use ($search) {
+                $query->where('title', 'LIKE', "%$search%");
+            })->paginate(20);
+        } else {
+            $movies = Movie::latest()->paginate(10);
+        }
+        return $movies;
     }
 }

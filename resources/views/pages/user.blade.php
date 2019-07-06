@@ -1,4 +1,4 @@
 @extends('layouts.master')
 @section('content')
-<movies-component></movies-component>
+<user-component :userid={{$user->id}}></user-component>
 @endsection
