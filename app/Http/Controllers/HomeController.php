@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\DB;
+use App\Movie;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.master');
+        return view('pages.dashboard');
     }
 }
